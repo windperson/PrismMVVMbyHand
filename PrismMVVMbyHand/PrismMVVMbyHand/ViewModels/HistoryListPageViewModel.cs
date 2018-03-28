@@ -23,6 +23,8 @@ namespace PrismMVVMbyHand.ViewModels
 
             ListHistoryCommand = new DelegateCommand(GetWordHistory);
             ClearHistoryCommand = new DelegateCommand(DoClearHistory);
+
+            GetWordHistory();
         }
 
 
@@ -53,15 +55,9 @@ namespace PrismMVVMbyHand.ViewModels
 
                 if (_selectedHistoryItem != null)
                 {
-                    ////NOTE: below doesn't work
-                    //var navigationParams = new NavigationParameters();
-                    //navigationParams.Add("selected", _selectedHistoryItem);
+                    
                     _navigationService.NavigateAsync(
                         new Uri($"http://abc/BasePrismTabbedPage?selectedTab=InputPage&selected={_selectedHistoryItem.Word}", UriKind.Absolute));
-
-                    //Prism.Common.IPageAware page = (Prism.Common.IPageAware)_navigationService;
-                    //page.Page.Navigation.PopAsync();
-
                 }
 
                 _selectedHistoryItem = null;
