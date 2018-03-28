@@ -1,4 +1,5 @@
-﻿using Prism;
+﻿using LibModel;
+using Prism;
 using Prism.Ioc;
 using PrismMVVMbyHand.ViewModels;
 using PrismMVVMbyHand.Views;
@@ -24,13 +25,17 @@ namespace PrismMVVMbyHand
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync(@"BasePrismTabbedPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage>();
+            containerRegistry.RegisterForNavigation<BasePrismTabbedPage>();
+            containerRegistry.RegisterForNavigation<InputPage>();
+            containerRegistry.RegisterForNavigation<HistoryListPage>();
+
+            containerRegistry.RegisterSingleton<WordHistoryModel>();
         }
     }
 }

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             x:Class="PrismMVVMbyHand.Views.InputPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Padding="10" Spacing="10">
+                <Label Text="Type Word:"/>
+                <Entry x:Name="InputArea" Text="{Binding InputText}"/>
+                <Label Text="Converted Word:"/>
+                <Label FontSize="16" 
+                   HorizontalTextAlignment="Center" 
+                   Text="{Binding DisplayText}" />
+                <StackLayout VerticalOptions="CenterAndExpand"/>
+                <Picker x:Name="ConverterPicker" Title="Selct a Converter:"
+                    SelectedIndex="{Binding SelectedConvterType}"
+                    ItemsSource="{Binding ConverterTypes, Mode=OneWay}">
+                    <Picker.Behaviors>
+                        <b:EventToCommandBehavior EventName="SelectedIndexChanged"
+                                              Command="{Binding ConverterChangeCommand}" />
+                    </Picker.Behaviors>
+                </Picker>
+                <StackLayout Orientation="Vertical" VerticalOptions="End">
+                    <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+
+                        <Button BackgroundColor="#A6E55E"
+                            Command="{Binding ConvertCommand}"
+                            CommandParameter="{Binding Source={x:Reference InputArea}, Path=Text}"
+                            Text="Convert" TextColor="White"/>
+
+                        <Button BackgroundColor="LightSkyBlue"
+                            Command="{Binding AddToHistoryCommand}"
+                            Text="Save" TextColor="White"/>
+
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
